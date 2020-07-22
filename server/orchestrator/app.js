@@ -1,6 +1,4 @@
-if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV == 'test') {
-  require('dotenv').config()
-}
+require('dotenv').config()
 const { ApolloServer, gql, makeExecutableSchema } = require('apollo-server')
 const movieSchema = require('./schema/movieSchema');
 const tvSchema = require('./schema/tvSchema')

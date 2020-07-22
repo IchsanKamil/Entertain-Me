@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 3001
 
 app.use(cors());
 app.use(express.json());
+app.get('/', (_, res) => res.json({ message: 'hello tv service ^^'}))
 app.use(router)
 
 app.listen(PORT, () => {

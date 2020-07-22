@@ -3,12 +3,26 @@ import { Card } from 'react-bootstrap';
 import {
   Link
 } from "react-router-dom";
+import { useMutation } from '@apollo/client';
+import { DELETE_MOVIE, GET_MOVIES } from '../query/Movie';
 
 export default props => {
+  const [deleteMovie, { data }] = useMutation(DELETE_MOVIE, {
+    refetchQueries: [{ query: GET_MOVIES }],
+  });
+
+  const onDelete = (id) => {
+    deleteMovie({
+      variables: {
+        movieId: id,
+      },
+    });
+  };
+
   return (
     <>
       <Card style={{ background: `#96c7d5` }}>
-        <Card.Img variant="top" src={`https://image.tmdb.org/t/p/original${props.movie.poster_path}`} alt="poster movie" height="300" />
+        <Card.Img variant="top" src={props.movie.poster_path} alt="poster movie" height="390" />
         <Card.Body>
           <Card.Title>{props.movie.title}</Card.Title>
           <Card.Text>
@@ -30,9 +44,7 @@ export default props => {
           <Link to={`/movies/edit/${props.movie._id}`}>
             <button className="btn btn-warning mr-2">Edit</button>
           </Link >
-          <Link to={`/movies/${props.movie._id}`}>
-            <button className="btn btn-danger mr-2">Delete</button>
-          </Link >
+          <button className="btn btn-danger mr-2" onClick={() => onDelete(props.movie._id)}>Delete</button>
           {/* <button className="btn btn-success" onClick={addFavorite}>Add to favorite</button> */}
           <button className="btn btn-success">Favorite</button>
         </Card.Footer>

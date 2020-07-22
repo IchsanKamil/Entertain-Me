@@ -14,7 +14,7 @@ function Home() {
   if (error) {
     return <p>Error ....</p>
   }
-
+  console.log(data, '<< Home');
   return (
     <Container>
       <CardColumns>

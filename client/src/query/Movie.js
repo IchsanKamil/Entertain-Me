@@ -13,7 +13,7 @@ const GET_MOVIES = gql`
   }
 `
 
-const GET_MOVIE = gql `
+const GET_MOVIE = gql`
   query ($movieId: ID) {
     movie(_id: $movieId) {
       _id
@@ -26,7 +26,7 @@ const GET_MOVIE = gql `
   }
 `
 
-const ADD_MOVIE = gql `
+const ADD_MOVIE = gql`
   mutation ($newMovie: MovieInput) {
     addMovie(movie: $newMovie) {
       _id
@@ -39,12 +39,31 @@ const ADD_MOVIE = gql `
   }
 `
 
-const DELETE_MOVIE = gql `
-  query ($movieId: ID) {
+const UPDATE_MOVIE = gql`
+  mutation ($movieId: ID, $editMovie: MovieInput) {
+    updateMovie(_id: $movieId, movie: $editMovie) {
+      _id
+      title
+      overview
+      poster_path
+      popularity
+      tags
+    }
+  }
+`
+
+const DELETE_MOVIE = gql`
+  mutation ($movieId: ID) {
     deleteMovie(_id: $movieId) {
       message
     }
   }
 `
 
-export { GET_MOVIES, GET_MOVIE, ADD_MOVIE, DELETE_MOVIE }
+export {
+  GET_MOVIES,
+  GET_MOVIE,
+  ADD_MOVIE,
+  UPDATE_MOVIE,
+  DELETE_MOVIE
+}

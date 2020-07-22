@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Col, Button, Container } from 'react-bootstrap';
-import { ADD_MOVIE } from '../query/Movie';
+import { ADD_MOVIE, GET_MOVIES } from '../query/Movie';
 import { useMutation } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
 
@@ -12,7 +12,9 @@ export default () => {
     popularity: 0,
     tags: []
   })
-  const [addMovie, { data }] = useMutation(ADD_MOVIE)
+  const [addMovie, { data }] = useMutation(ADD_MOVIE, {
+    refetchQueries: [{ query: GET_MOVIES }]
+  })
   const history = useHistory()
 
   const onChange = (e) => {
@@ -25,13 +27,7 @@ export default () => {
     e.preventDefault()
     addMovie({
       variables: {
-        newMovie: {
-          title: movieInput.title,
-          overview: movieInput.overview,
-          poster_path: movieInput.poster_path,
-          popularity: +movieInput.popularity,
-          tags: movieInput.tags
-        }
+        newMovie: { ...movieInput, popularity: +movieInput.popularity }
       }
     })
     history.push('/')

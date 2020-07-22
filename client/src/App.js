@@ -10,8 +10,9 @@ import { ApolloProvider } from '@apollo/client';
 import client from './config/graphql';
 import Home from './pages/Home'
 import Movie from './pages/Movie'
-import FormMovie from './pages/FormMovie'
 import TV from './pages/TV'
+import AddMovie from './pages/AddMovie'
+import EditMovie from './pages/EditMovie';
 import MovieDetail from './components/MovieDetail';
 
 function App() {
@@ -34,6 +35,9 @@ function App() {
         </Nav>
         <h1 className="display-1 text-center my-3">EntertaintMe</h1>
         <Switch>
+          <Route path='/movies/edit/:id'>
+            <EditMovie />
+          </Route>
           <Route path='/movies/:id'>
             <MovieDetail />
           </Route>
@@ -44,7 +48,7 @@ function App() {
             <Movie />
           </Route>
           <Route path='/addMovie'>
-            <FormMovie />
+            <AddMovie />
           </Route>
           <Route path='/'>
             <Home />

@@ -18,11 +18,11 @@ export default () => {
   if (error) {
     return <p>Error ....</p>
   }
-
+  console.log(movie, '<<');
   return (
-    <Container>
-      <Card style={{ background: `#96c7d5` }}>
-        <Card.Img variant="top" src={`https://image.tmdb.org/t/p/original${movie.movie.poster_path}`} alt="poster movie" height="350" />
+    <Container className="d-flex justify-content-center">
+      <Card style={{ background: `#96c7d5`, width: '18rem' }}>
+        <Card.Img variant="top" src={movie.movie.poster_path} alt="poster movie" height="350" />
         <Card.Body>
           <Card.Title>{movie.movie.title}</Card.Title>
           <Card.Text>

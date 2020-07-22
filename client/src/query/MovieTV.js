@@ -6,6 +6,7 @@ const GET_ALL = gql`
       _id
       title
       overview
+      poster_path
       popularity
       tags
     }
@@ -13,6 +14,7 @@ const GET_ALL = gql`
       _id
       title
       overview
+      poster_path
       popularity
       tags
     }

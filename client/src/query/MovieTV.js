@@ -21,4 +21,10 @@ const GET_ALL = gql`
   }
 `
 
-export default GET_ALL
+const GET_FAVORITE = gql`
+  query {
+    favorites @client
+  }
+`
+
+export { GET_ALL, GET_FAVORITE }

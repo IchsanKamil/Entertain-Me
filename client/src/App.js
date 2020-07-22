@@ -13,6 +13,7 @@ import Movie from './pages/Movie'
 import TV from './pages/TV'
 import AddMovie from './pages/AddMovie'
 import EditMovie from './pages/EditMovie';
+import Favorite from './pages/Favorite';
 import MovieDetail from './components/MovieDetail';
 
 function App() {
@@ -22,7 +23,10 @@ function App() {
         <Nav className="justify-content-around mt-3" variant="pills" defaultActiveKey="/">
           <Link to={`/`}>
             Home
-            </Link>
+          </Link>
+          <Link to={`/favorites`}>
+            Favorite
+          </Link>
           <Link to={`/movies`}>
             Movies
           </Link>
@@ -40,6 +44,9 @@ function App() {
           </Route>
           <Route path='/movies/:id'>
             <MovieDetail />
+          </Route>
+          <Route path='/favorites'>
+            <Favorite />
           </Route>
           <Route path='/tv_series'>
             <TV />

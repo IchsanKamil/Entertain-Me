@@ -11,7 +11,6 @@ export default () => {
     variables: { movieId: id }
   })
   // console.log(movie, '<<<<');
-  
 
   const [dataMovie, setDataMovie] = useState({})
   const [updateMovie, { data }] = useMutation(UPDATE_MOVIE, {

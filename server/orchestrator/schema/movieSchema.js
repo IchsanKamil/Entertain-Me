@@ -1,7 +1,7 @@
 const { gql } = require('apollo-server')
 const axios = require('axios')
-const Redis = require('ioredis')
-const redis = new Redis()
+// const Redis = require('ioredis')
+// const redis = new Redis()
 
 const typeDefs = gql `
   type Movie {
@@ -42,16 +42,16 @@ const urlMovie = process.env.MOVIES_SERVICES_PATH
 const resolvers = {
   Query: {
     movies: async () => {
-      const movies = await redis.get('movies')
+      // const movies = await redis.get('movies')
 
-      if (movies) {
-        return JSON.parse(movies)
-      } else {
-        const { data } = await axios.get(urlMovie)
+      // if (movies) {
+      //   return JSON.parse(movies)
+      // } else {
+      // }
+      const { data } = await axios.get(urlMovie)
 
-        redis.set('movies', JSON.stringify(data))
-        return data
-      }
+      // redis.set('movies', JSON.stringify(data))
+      return data
     },
     movie: function (parent, args, context, info) {
       const { _id } = args
@@ -79,7 +79,7 @@ const resolvers = {
         }
       })
         .then(({ data }) => {
-          redis.del('movies')
+          // redis.del('movies')
           return data
         }).catch((err) => {
           console.log(err)
@@ -97,7 +97,7 @@ const resolvers = {
         }
       })
         .then(({data}) => {
-          redis.del('movies')
+          // redis.del('movies')
           return data
         }).catch((err) => {
           console.log(err)
@@ -111,7 +111,7 @@ const resolvers = {
         url: `${urlMovie}/${_id}`,
       })
         .then(() => {
-          redis.del('movies')
+          // redis.del('movies')
           return {
             message: "Movie successfully deleted"
           }

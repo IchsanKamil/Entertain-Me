@@ -1,9 +1,9 @@
 const { gql } = require('apollo-server')
 const axios = require('axios')
-const Redis = require('ioredis')
-const redis = new Redis()
+// const Redis = require('ioredis')
+// const redis = new Redis()
 
-const typeDefs = gql `
+const typeDefs = gql`
   type TV {
     _id: ID
     title: String
@@ -42,22 +42,22 @@ const urlTV = process.env.TV_SERIES_SERVICES_PATH
 const resolvers = {
   Query: {
     tvs: async () => {
-      const tvs = await redis.get('tvs')
+      // const tvs = await redis.get('tvs')
 
-      if (tvs) {
-        return JSON.parse(tvs)
-      } else {
-        return await axios({
-          method: 'get',
-          url: urlTV
-        })
-          .then(({ data }) => {
-            redis.set('tvs', JSON.stringify(data))
-            return data
-          }).catch((err) => {
-            console.log(err);
-          });
-      }
+      // if (tvs) {
+      //   return JSON.parse(tvs)
+      // } else {
+      // }
+      return await axios({
+        method: 'get',
+        url: urlTV
+      })
+        .then(({ data }) => {
+          // redis.set('tvs', JSON.stringify(data))
+          return data
+        }).catch((err) => {
+          console.log(err);
+        });
     },
     tv: function (parent, args, context, info) {
       const { _id } = args
@@ -85,7 +85,7 @@ const resolvers = {
         }
       })
         .then(({ data }) => {
-          redis.del('tvs')
+          // redis.del('tvs')
           return data
         }).catch((err) => {
           console.log(err)
@@ -102,8 +102,8 @@ const resolvers = {
           title, overview, poster_path, popularity, tags
         }
       })
-        .then(({data}) => {
-          redis.del('tvs')
+        .then(({ data }) => {
+          // redis.del('tvs')
           return data
         }).catch((err) => {
           console.log(err)
@@ -117,7 +117,7 @@ const resolvers = {
         url: `${urlTV}/${_id}`,
       })
         .then(() => {
-          redis.del('tvs')
+          // redis.del('tvs')
           return {
             message: "TV Series successfully deleted"
           }

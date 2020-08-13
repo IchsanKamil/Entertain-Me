@@ -1,3 +1,6 @@
+## Link
+http://ren-entertainme.s3-website-ap-southeast-1.amazonaws.com
+
 ## Week-2 Day 4
 
 - kerjakan di folder `server/express`
